@@ -1,9 +1,6 @@
 #pragma once
 #include <SFML\Graphics.hpp>
 #include "StateHandler.h"
-#include "LevelState.h"
-#include "Player.h"
-#include "Assets.h"
 
 class Engine
 {
@@ -17,7 +14,6 @@ private:
 	void draw();
 	void update();
 	StateHandler stateHandler;
-	LevelState ls;
 
 public:
 	Engine();
@@ -26,11 +22,11 @@ public:
 
 	void run();
 
-	
 
 	//Getters
 	int getScreenWidth();
 	int getScreenHeight();
+	StateHandler getStateHandler();
 
 	//setters
 	void setScreenWidth(int screenWidth);

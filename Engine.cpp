@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Engine.h"
-
+#include "MenuState.h"
 //Assets Engine::assets;
 
 Engine::Engine() {}
@@ -16,8 +16,6 @@ Engine::Engine(int screenWidth, int screenHeight, std::string title)
 	this->screenHeight = screenHeight;							//Window with title and close buttons
 	gameWindow.create(sf::VideoMode(screenWidth, screenHeight), title, sf::Style::Titlebar + sf::Style::Close);
 	gameWindow.setFramerateLimit(60);
-
-	stateHandler.pushState(&ls);
 }
 
 //Methods
@@ -37,6 +35,11 @@ void Engine::update()
 
 void Engine::run()
 {
+	//Create a Menu
+	MenuState menu(getScreenWidth(), stateHandler);
+	//Add Menu to stack
+	stateHandler.pushState(&menu);
+
 	while (gameWindow.isOpen())
 	{
 		sf::Event gameEvent;
@@ -64,6 +67,11 @@ int Engine::getScreenWidth()
 int Engine::getScreenHeight()
 {
 	return screenHeight;
+}
+
+StateHandler Engine::getStateHandler()
+{
+	return stateHandler;
 }
 
 //Setters

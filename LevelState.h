@@ -5,14 +5,6 @@
 
 class LevelState : public State
 {
-private:
-
-	EntityManager em;
-
-public:
-	/*LevelState();
-	~LevelState();*/
-	void draw(sf::RenderWindow &gameWindow);
-	void update();
-	void input();
+protected:
+	EntityManager entityManager;
 };
