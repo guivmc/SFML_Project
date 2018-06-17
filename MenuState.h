@@ -1,27 +1,22 @@
 #pragma once
 #include "State.h"
 #include "Engine.h"
-#include "LevelOne.h"
 
 class MenuState : public State
 {
 private:
+	GameDataRef _data;
 
 	std::string texts[2] = { "Menu.", "Press Enter." };
 	sf::Text sfText[2];
 	sf::Font sfFont;
 
-	LevelOne l1;
-
-	StateHandler *st;
-
 public:
+	MenuState(GameDataRef data);
 
-	MenuState();
-	MenuState(int width, StateHandler &state);
-   ~MenuState();
+	void init();
 
-	void draw(sf::RenderWindow &gameWindow);
-	void update();
+	void draw(float dt);
+	void update(float dt);
 	void input();
 };

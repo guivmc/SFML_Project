@@ -1,15 +1,20 @@
 #pragma once
-#include "LevelState.h"
+#include "State.h"
+#include "Engine.h"
+#include "Player.h"
 
-class LevelOne : public LevelState
+class LevelOne : public State
 {
-
+private:
+	GameDataRef _data;
+	Player *p;
 public:
-	LevelOne();
-	~LevelOne();
+	LevelOne(GameDataRef data);
 
-	void draw(sf::RenderWindow &gameWindow);
-	void update();
+	void init();
+
+	void draw(float dt);
+	void update(float dt);
 	void input();
 };
 

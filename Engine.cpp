@@ -1,60 +1,71 @@
 #include "stdafx.h"
 #include "Engine.h"
 #include "MenuState.h"
-//Assets Engine::assets;
-
-Engine::Engine() {}
-
-Engine::~Engine()
-{
-	stateHandler.popAll();
-}
 
 Engine::Engine(int screenWidth, int screenHeight, std::string title) 
 {
 	this->screenWidth = screenWidth;
 	this->screenHeight = screenHeight;							//Window with title and close buttons
-	gameWindow.create(sf::VideoMode(screenWidth, screenHeight), title, sf::Style::Titlebar + sf::Style::Close);
-	gameWindow.setFramerateLimit(60);
+	_data->_window.create(sf::VideoMode(screenWidth, screenHeight), title, 
+						  sf::Style::Titlebar + sf::Style::Close);
 }
 
 //Methods
-void Engine::draw()
+void Engine::createMenu()
 {
-	gameWindow.clear();
-
-	stateHandler.getTopState()->draw(gameWindow);
-
-	gameWindow.display();
+	_data->_stateMachine.addState(StateRef(new MenuState(this->_data)), false);
 }
 
-void Engine::update()
+void Engine::drawEngine(float dt)
 {
-	stateHandler.getTopState()->update();
+	this->_data->_window.clear(sf::Color::Black);
+
+	this->_data->_stateMachine.getActiveState()->draw(dt);
+
+	this->_data->_window.display();
+}
+
+void Engine::handleInputEngine()
+{
+	sf::Event event;
+
+	while (this->_data->_window.pollEvent(event))
+	{
+		if (sf::Event::Closed == event.type)
+		{
+			this->_data->_window.close();
+		}
+
+		this->_data->_stateMachine.getActiveState()->input();
+	}
 }
 
 void Engine::run()
 {
-	//Create a Menu
-	MenuState menu(getScreenWidth(), stateHandler);
-	//Add Menu to stack
-	stateHandler.pushState(&menu);
+	float newTime, frameTime, interpolation, accumulator = 0, 
+		  currentTime = this->_clock.getElapsedTime().asSeconds();
+																			
+	createMenu();
 
-	while (gameWindow.isOpen())
+	while (this->_data->_window.isOpen())
 	{
-		sf::Event gameEvent;
-		while (gameWindow.pollEvent(gameEvent))
+		this->_data->_stateMachine.processStateChanges();
+		
+		newTime = this->_clock.getElapsedTime().asSeconds();
+		//Frame diference 
+		frameTime = newTime - currentTime;
+		if (frameTime > 0.25f) frameTime = 0.25f;
+		currentTime = newTime;
+		accumulator += frameTime;
+		//update with frame
+		while (accumulator >= dt)
 		{
-			if (gameEvent.type == sf::Event::Closed)
-			{
-				//stateHandler.popState();
-				gameWindow.close();
-			}
-			if (gameEvent.type == sf::Event::KeyPressed) stateHandler.getTopState()->input();
+			handleInputEngine();
+			this->_data->_stateMachine.getActiveState()->update(dt);
+			accumulator -= dt;
 		}
-
-		update();
-		draw();
+		interpolation = accumulator / dt;
+		drawEngine(interpolation);
 	}
 }
 
@@ -67,11 +78,6 @@ int Engine::getScreenWidth()
 int Engine::getScreenHeight()
 {
 	return screenHeight;
-}
-
-StateHandler Engine::getStateHandler()
-{
-	return stateHandler;
 }
 
 //Setters

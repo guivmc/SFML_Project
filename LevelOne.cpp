@@ -1,24 +1,24 @@
 #include "stdafx.h"
 #include "LevelOne.h"
 
-LevelOne::LevelOne()
+LevelOne::LevelOne(GameDataRef data) : _data(data)
 {
 
 }
 
-LevelOne::~LevelOne()
+void LevelOne::init()
 {
 
 }
 
-void LevelOne::draw(sf::RenderWindow &gameWindow)
+void LevelOne::draw(float dt)
 {
-
+	
 }
 
-void LevelOne::update()
+void LevelOne::update(float dt)
 {
-
+	
 }
 
 void LevelOne::input()

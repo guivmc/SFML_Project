@@ -1,20 +1,27 @@
 #pragma once
 #include <stack>
+#include <memory>
 #include "State.h"
+
+typedef std::unique_ptr<State> StateRef;
 
 class StateHandler
 {
 private:
-	//states container
-	std::stack<State*> states;
+	//States container
+	std::stack<StateRef> _states;
+	//State to add
+	StateRef _newState;
+	//Tracker
+	bool _isReplacingTop, _isAdding, _isRemoving;
 public:
-	//handler logic
-	void pushState(State* state);
-	void popStateTop();
-	void popAll();
-	void changeState(State* state);
-	//Getters
-	State* getTopState();
-	bool isStatesEmpty();
+	StateHandler() {}
+	~StateHandler() {}
 
+	//Handler logic
+	void addState(StateRef newState, bool isReplacingTop = true);
+	void removeState();
+	void processStateChanges();
+	//Getters
+	StateRef &getActiveState();
 };

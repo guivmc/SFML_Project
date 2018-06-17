@@ -1,42 +1,60 @@
 #include "stdafx.h"
 #include "StateHandler.h"
 
-//Methods
-void StateHandler::pushState(State* state)
+void StateHandler::addState(StateRef newState, bool isReplacingTop)
 {
-	//add element
-	states.push(state);
+	this->_isAdding = true;
+	this->_isReplacingTop = isReplacingTop;
+
+	this->_newState = std::move(newState);
 }
 
-void StateHandler::popStateTop()
+void StateHandler::removeState()
 {
-	//Make the memory liberate the space memory where this is located, 
-										//to allow new data to be stored at that same space.
-	delete states.top();
-	//remove top element
-	states.pop();
+	this->_isRemoving = true;
 }
 
-void StateHandler::popAll()
+void StateHandler::processStateChanges()
 {
-	while (!states.empty()) states.pop();
+	//If we were to remove
+	if (this->_isRemoving && !this->_states.empty())
+	{
+		this->_states.pop();
+
+		if (!this->_states.empty())
+		{
+			//Put the top state to run
+			this->_states.top()->resume();
+		}
+
+		this->_isRemoving = false;
+	}
+
+	//If we were to add
+	if (this->_isAdding)
+	{
+		if (!this->_states.empty())
+		{
+			//Replace for a new one
+			if (this->_isReplacingTop)
+			{
+				this->_states.pop();
+			}
+			else
+			{
+				//Pause top as it will no longer be on top
+				this->_states.top()->pause();
+			}
+		}
+		//Add state to pile
+		this->_states.push(std::move(this->_newState));
+		//Init the added state
+		this->_states.top()->init();
+		this->_isAdding = false;
+	}
 }
 
-void StateHandler::changeState(State* state)
+StateRef &StateHandler::getActiveState()
 {
-	if (!states.empty()) states.pop();;
-	states.push(state);
-}
-
-//Getters
-State* StateHandler::getTopState()
-{
-						//null pointer
-	if (states.empty()) return nullptr;
-	return states.top();
-}
-
-bool StateHandler::isStatesEmpty()
-{
-	return states.empty();
+	return this->_states.top();
 }

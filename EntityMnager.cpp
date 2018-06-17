@@ -12,6 +12,7 @@ EntityManager::~EntityManager(){}
 void EntityManager::draw(sf::RenderWindow &gameWindow)
 {
 	player.draw(gameWindow);
+	//gameWindow.draw(player.getSprite());
 }
 
 void EntityManager::update()

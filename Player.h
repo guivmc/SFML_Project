@@ -32,6 +32,7 @@ public:
 	//Getters
 	sf::FloatRect getBounds();
 	float getHP();
+	sf::Sprite &getSprite();
 
 	//setters
 	void setHP(float hp);

@@ -79,6 +79,11 @@ float Player::getHP()
 	return hp;
 }
 
+sf::Sprite &Player::getSprite()
+{
+	return sprite;
+}
+
 //Setters
 void Player::setHP(float hp)
 {
