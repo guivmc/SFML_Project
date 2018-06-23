@@ -7,8 +7,8 @@ class Assets
 private:
 	std::unordered_map<std::string, sf::Texture> textureMap;
 public:
-	Assets();
-	~Assets();
+	Assets(){}
+   ~Assets(){}
 
 	void loadTexture(const std::string &name, const std::string &fileName);
 

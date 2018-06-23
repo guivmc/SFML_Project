@@ -3,6 +3,7 @@
 #include <memory>
 #include "State.h"
 
+//Pointer that auto manages itself.
 typedef std::unique_ptr<State> StateRef;
 
 class StateHandler
@@ -16,7 +17,7 @@ private:
 	bool _isReplacingTop, _isAdding, _isRemoving;
 public:
 	StateHandler() {}
-	~StateHandler() {}
+   ~StateHandler() {}
 
 	//Handler logic
 	void addState(StateRef newState, bool isReplacingTop = true);

@@ -18,40 +18,40 @@ void Engine::createMenu()
 
 void Engine::drawEngine(float dt)
 {
-	this->_data->_window.clear(sf::Color::Black);
+	_data->_window.clear(sf::Color::Black);
 
-	this->_data->_stateMachine.getActiveState()->draw(dt);
+	_data->_stateMachine.getActiveState()->draw(dt);
 
-	this->_data->_window.display();
+	_data->_window.display();
 }
 
 void Engine::handleInputEngine()
 {
 	sf::Event event;
 
-	while (this->_data->_window.pollEvent(event))
+	while (_data->_window.pollEvent(event))
 	{
 		if (sf::Event::Closed == event.type)
 		{
-			this->_data->_window.close();
+			_data->_window.close();
 		}
 
-		this->_data->_stateMachine.getActiveState()->input();
+		_data->_stateMachine.getActiveState()->input();
 	}
 }
 
 void Engine::run()
 {
 	float newTime, frameTime, interpolation, accumulator = 0, 
-		  currentTime = this->_clock.getElapsedTime().asSeconds();
+		  currentTime = _clock.getElapsedTime().asSeconds();
 																			
 	createMenu();
 
-	while (this->_data->_window.isOpen())
+	while (_data->_window.isOpen())
 	{
-		this->_data->_stateMachine.processStateChanges();
+		_data->_stateMachine.processStateChanges();
 		
-		newTime = this->_clock.getElapsedTime().asSeconds();
+		newTime = _clock.getElapsedTime().asSeconds();
 		//Frame diference 
 		frameTime = newTime - currentTime;
 		if (frameTime > 0.25f) frameTime = 0.25f;
@@ -61,7 +61,7 @@ void Engine::run()
 		while (accumulator >= dt)
 		{
 			handleInputEngine();
-			this->_data->_stateMachine.getActiveState()->update(dt);
+			_data->_stateMachine.getActiveState()->update(dt);
 			accumulator -= dt;
 		}
 		interpolation = accumulator / dt;

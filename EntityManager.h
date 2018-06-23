@@ -1,17 +1,18 @@
 #pragma once
-#include "Player.h"
-#include "Assets.h"
+#include "Engine.h"
+#include "Persona.h"
+#include <vector>
 
 class EntityManager
 {
 private:
-	Player player;
-	Assets assets;
-
+	GameDataRef _data;
+	std::vector<Persona> entities;
 public:
-	EntityManager();
-	~EntityManager();
+	EntityManager(GameDataRef data);
+   ~EntityManager(){}
 
+    void addEntity(Persona e);
 	void update();
-	void draw(sf::RenderWindow &gameWindow);
+	void draw();
 };

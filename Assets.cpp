@@ -1,10 +1,5 @@
 #include "stdafx.h"
 #include "Assets.h"
-
-Assets::Assets() {}
-
-Assets::~Assets() {}
-
 //Methods
 void Assets::loadTexture(const std::string &name, const std::string &fileName)
 {

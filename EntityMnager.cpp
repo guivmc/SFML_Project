@@ -1,21 +1,21 @@
 #include "stdafx.h"
 #include "EntityManager.h"
 
-EntityManager::EntityManager() : player(70, 70, 4)
+EntityManager::EntityManager(GameDataRef data) : _data(data)
 {
-	assets.loadTexture("Chars", "res/textures/Chars.png");
-	player.setSprite(assets.getTexture("Chars"));
 }
 
-EntityManager::~EntityManager(){}
-
-void EntityManager::draw(sf::RenderWindow &gameWindow)
+void EntityManager::addEntity(Persona e)
 {
-	player.draw(gameWindow);
-	//gameWindow.draw(player.getSprite());
+
+}
+
+void EntityManager::draw()
+{
+
 }
 
 void EntityManager::update()
 {
-	player.update();
+
 }

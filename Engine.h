@@ -2,13 +2,18 @@
 #include <memory>
 #include <SFML\Graphics.hpp>
 #include "StateHandler.h"
+#include "Assets.h"
 
+//"Global" acess to these datas.
 struct GameData
 {
 	sf::RenderWindow _window;
 	StateHandler _stateMachine;
+	Assets _assets;
 };
 
+//Pointer that is manage by a group of the same pointer type, with the same data.
+//Can share data across others shared pointers of the same type.
 typedef std::shared_ptr<GameData> GameDataRef;
 
 class Engine
@@ -26,7 +31,7 @@ private:
 
 public:
 	Engine() {}
-	~Engine() {}
+   ~Engine() {}
 	Engine(int screenWidth, int screenHeight, std::string title);
 
 	void run();

@@ -17,8 +17,8 @@ private:
 	//Animation anims[2] = {Animation(idle_, 0.03f, 5), Animation(walk_, 0.07f, 16) };
 	int currentAnim;
 public:
-	Player();
-	~Player();
+	Player() {}
+   ~Player() {}
 	Player(int x, int y, float hp);
 
 	//Logic

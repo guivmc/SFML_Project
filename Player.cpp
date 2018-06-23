@@ -2,10 +2,6 @@
 #include "Player.h"
 #include "PlayerAnimList.h"
 
-Player::Player() {}
-
-Player::~Player() {}
-
 Player::Player(int x, int y, float hp) 
 {
 	this->x = x;
@@ -15,7 +11,7 @@ Player::Player(int x, int y, float hp)
 	bounds.setSize(sf::Vector2f(20, 20));
 	sprite.setOrigin(24, 16);
 	currentAnim = 0;
-	sprite.setTextureRect(sf::IntRect(48, 30, 51, 66));
+	//sprite.setTextureRect(sf::IntRect(48, 30, 51, 66));
 }
 
 //Methods
@@ -62,8 +58,7 @@ void Player::moveY(float speedY)
 
 bool Player::isDead()
 {
-	if (hp > 0) return false;
-	return true;
+	return (hp > 0);
 }
 
 //Graphics
