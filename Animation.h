@@ -12,14 +12,20 @@ private:
 	//Rects
 	sf::IntRect *rects;
 	int frameIndex, totalFrames;
+
 public:
-	Animation();
-	~Animation();
+	Animation(){}
+   ~Animation(){}
 	Animation(sf::IntRect rects[], float secondsToElapse, int totalFrmaes);
 
-	void updateLoopAnim();
-	void updateLoopAnimReverse();
-	void updateAnim();
+	void playAnim();
+
+	//Anims. with the sequence 1-2-3-1-2-3
+	void loopDirectAnim();
+	//Anims. with the sequence 1-2-3-2-1-2-3
+	void loopReverseAnim();
+	//Anims. with the sequence 1-2-3
+	void soloAnim();
 
 	//Getters
 	sf::IntRect &getCurrentFrame();

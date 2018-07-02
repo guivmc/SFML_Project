@@ -14,3 +14,9 @@ bool Persona::isDead()
 {
 	return (hp > 0);
 }
+
+//Getters
+sf::Sprite &Persona::getSprite()
+{
+	return sprite;
+}

@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "Player.h"
-#include "PlayerAnimList.h"
 
 Player::Player(int x, int y, float hp) 
 {
@@ -9,24 +8,19 @@ Player::Player(int x, int y, float hp)
 	this->hp = hp;
 	speedX = 3.0f;
 	bounds.setSize(sf::Vector2f(20, 20));
-	sprite.setOrigin(24, 16);
+	sprite.setOrigin(24, 15);
 	currentAnim = 0;
-	//sprite.setTextureRect(sf::IntRect(48, 30, 51, 66));
+	sprite.setTextureRect(sf::IntRect(0, 18, 48, 31));
 }
 
 //Methods
 //Logic
 void Player::update()
 {
-	input();
+	//input();
 	//anims[currentAnim].updateLoopAnim();
 	sprite.setPosition(x, y);
 	//sprite.setTextureRect(anims[currentAnim].getCurrentFrame());
-}
-
-void Player::draw(sf::RenderWindow &gameWindow)
-{
-	gameWindow.draw(sprite);
 }
 
 void Player::input()

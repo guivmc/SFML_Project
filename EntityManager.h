@@ -7,12 +7,14 @@ class EntityManager
 {
 private:
 	GameDataRef _data;
-	std::vector<Persona> entities;
+	std::vector<Persona*> entities;
 public:
 	EntityManager(GameDataRef data);
    ~EntityManager(){}
 
     void addEntity(Persona e);
+	void addEntity(int x, int y, float hp, const std::string &keyName);
+	void clearAll();
 	void update();
 	void draw();
 };

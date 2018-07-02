@@ -17,4 +17,6 @@ public:
 	Persona(int x, int y, float hp, sf::Texture &texture);
 
 	bool isDead();
+
+	sf::Sprite &getSprite();
 };

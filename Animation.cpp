@@ -1,9 +1,6 @@
 #include "stdafx.h"
 #include "Animation.h"
 #include <iostream>
-Animation::Animation() {}
-
-Animation::~Animation() {}
 
 Animation::Animation(sf::IntRect rects[], float secondsToElapse, int totalFrames)
 {
@@ -16,7 +13,7 @@ Animation::Animation(sf::IntRect rects[], float secondsToElapse, int totalFrames
 }
 
 //Methods
-void Animation::updateAnim()
+void Animation::soloAnim()
 {
 	if (frameIndex > totalFrames) return;
 	float elapsed = clock.getElapsedTime().asSeconds();
@@ -27,7 +24,7 @@ void Animation::updateAnim()
 	}
 }
 
-void Animation::updateLoopAnim()
+void Animation::loopDirectAnim()
 {
 	float elapsed = clock.getElapsedTime().asSeconds();
 	if (elapsed >= secondsToElapse)
@@ -37,10 +34,38 @@ void Animation::updateLoopAnim()
 		//reset frame
 		if (frameIndex >= totalFrames)
 		{
-			
 			frameIndex = 0;
 		}
 	}	
+}
+
+void Animation::loopReverseAnim()
+{
+	bool reverse = false;
+	float elapsed = clock.getElapsedTime().asSeconds();
+	if (elapsed >= secondsToElapse)
+	{
+		clock.restart();
+		//reset frame
+		if (frameIndex <= totalFrames && !reverse)
+		{
+			frameIndex++;
+			if (frameIndex >= totalFrames)
+			{
+				frameIndex = totalFrames;
+				reverse = true;
+			}
+		}
+		else if (frameIndex <= totalFrames && reverse)
+		{
+			frameIndex--;
+			if (frameIndex <= 0)
+			{			
+				frameIndex = 0;
+				reverse = false;
+			}
+		}
+	}
 }
 
 //Getters

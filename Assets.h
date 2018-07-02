@@ -10,7 +10,10 @@ public:
 	Assets(){}
    ~Assets(){}
 
-	void loadTexture(const std::string &name, const std::string &fileName);
+	void loadTexture(const std::string &keyName, const std::string &fileName);
+	void unloadAll();
 
-	sf::Texture &getTexture(const std::string &name);
+	bool isTextureLoaded(const std::string &keyName);
+
+	sf::Texture &getTexture(const std::string &keyName);
 };

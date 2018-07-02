@@ -2,7 +2,6 @@
 #include <SFML\Graphics.hpp>
 #include <SFML\System.hpp>
 #include "Animation.h"
-#include "PlayerAnimList.h"
 
 
 class Player
@@ -23,7 +22,6 @@ public:
 
 	//Logic
 	void update();
-	void draw(sf::RenderWindow &gameWindow);
 	void input();
 	void moveX(float speedX);
 	void moveY(float speedY);
@@ -31,8 +29,9 @@ public:
 
 	//Getters
 	sf::FloatRect getBounds();
-	float getHP();
 	sf::Sprite &getSprite();
+	float getHP();
+	
 
 	//setters
 	void setHP(float hp);
