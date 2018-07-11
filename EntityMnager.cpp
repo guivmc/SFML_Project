@@ -5,18 +5,18 @@ EntityManager::EntityManager(GameDataRef data) : _data(data)
 {
 }
 
-void EntityManager::addEntity(Persona e)
-{
-
-}
+//void EntityManager::addEntity(Persona e)
+//{
+//
+//}
 
 void EntityManager::addEntity(int x, int y, float hp, const std::string &keyName)
 {
 	if (!_data->_assets.isTextureLoaded(keyName))
 	{
-		_data->_assets.loadTexture(keyName, "res/textures/"+ keyName +".png");
+		_data->_assets.loadTexture(keyName);
 	}
-	Persona *per = new Persona(x, y, hp, _data->_assets.getTexture(keyName));
+	Persona *per = new Slime(x, y, hp, _data->_assets.getTexture(keyName));
 
 	entities.push_back(per);
 }
@@ -46,6 +46,10 @@ void EntityManager::update()
 		{
 			delete entities.at(i);
 			entities.erase(entities.begin() + i);
+		}
+		else
+		{
+			entities.at(i)->update();
 		}
 	}
 }

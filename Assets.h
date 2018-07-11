@@ -10,7 +10,7 @@ public:
 	Assets(){}
    ~Assets(){}
 
-	void loadTexture(const std::string &keyName, const std::string &fileName);
+	void loadTexture(const std::string &keyName);
 	void unloadAll();
 
 	bool isTextureLoaded(const std::string &keyName);

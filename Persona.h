@@ -10,11 +10,14 @@ protected:
 
 	//Graphics
 	int x, y;
+	int id;
 	sf::Sprite sprite;
 public:
 	Persona() {}
    ~Persona() {}
 	Persona(int x, int y, float hp, sf::Texture &texture);
+
+	virtual void update() = 0;
 
 	bool isDead();
 

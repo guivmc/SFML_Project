@@ -2,36 +2,29 @@
 #include <SFML\System.hpp>
 #include <SFML\Graphics.hpp>
 
-
 class Animation
 {
-private:
+protected:
 	//Timing
 	sf::Clock clock;
-	float secondsToElapse;
-	//Rects
-	sf::IntRect *rects;
-	int frameIndex, totalFrames;
+	float totalTime, secondsToElapse;
+	int animSheetHeight, currentFrameWidth, totalFrames, frameCount = 0;
+	sf::Vector2i spriteSize;
 
 public:
-	Animation(){}
+	Animation(sf::Vector2i spriteSize, int animSheetHeight, float secondsToElapse, int totalFrmaes);
    ~Animation(){}
-	Animation(sf::IntRect rects[], float secondsToElapse, int totalFrmaes);
 
-	void playAnim();
-
-	//Anims. with the sequence 1-2-3-1-2-3
-	void loopDirectAnim();
-	//Anims. with the sequence 1-2-3-2-1-2-3
-	void loopReverseAnim();
 	//Anims. with the sequence 1-2-3
-	void soloAnim();
+    sf::IntRect &soloAnim(float dt);
+	//Anims. with the sequence 1-2-3-1-2-3
+	//void directAnim(float dt);
+	//Anims. with the sequence 1-2-3-2-1
+	//void reverseAnim(float dt);
 
 	//Getters
 	sf::IntRect &getCurrentFrame();
-
 	//Setters
-	void setRectsArr(sf::IntRect rects[]);
 	void setSecondsToElapse(float secondsToElapse);
 };
 

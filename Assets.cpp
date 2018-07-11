@@ -1,10 +1,10 @@
 #include "stdafx.h"
 #include "Assets.h"
 //Methods
-void Assets::loadTexture(const std::string &keyName, const std::string &fileName)
+void Assets::loadTexture(const std::string &keyName)
 {
 	sf::Texture tex;
-	if (tex.loadFromFile(fileName))
+	if (tex.loadFromFile("res/chars/" + keyName + ".png"))
 	{
 		textureMap[keyName] = tex;
 	}
