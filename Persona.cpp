@@ -12,7 +12,7 @@ Persona::Persona(int x, int y, float hp, sf::Texture &texture)
 //Methods
 bool Persona::isDead()
 {
-	return (hp > 0);
+	return (hp < 0);
 }
 
 //Getters

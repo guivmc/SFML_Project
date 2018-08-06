@@ -4,7 +4,7 @@
 void Assets::loadTexture(const std::string &keyName)
 {
 	sf::Texture tex;
-	if (tex.loadFromFile("res/chars/" + keyName + ".png"))
+	if (tex.loadFromFile("res/chars/" + keyName + "/" + keyName + ".png"))
 	{
 		textureMap[keyName] = tex;
 	}

@@ -16,6 +16,6 @@ public:
     //void addEntity(Persona e);
 	void addEntity(int x, int y, float hp, const std::string &keyName);
 	void clearAll();
-	void update();
+	void update(float dt);
 	void draw();
 };

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Engine.h"
 #include "MenuState.h"
+#include <iostream>
 
 Engine::Engine(int screenWidth, int screenHeight, std::string title) 
 {
@@ -66,6 +67,8 @@ void Engine::run()
 		}
 		interpolation = accumulator / dt;
 		drawEngine(interpolation);
+
+		//std::cout << accumulator << std::endl;
 	}
 }
 

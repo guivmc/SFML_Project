@@ -17,13 +17,13 @@ void LevelOne::init()
 void LevelOne::draw(float dt)
 {
 	entityManager.draw();
-	_data->_window.draw(p->getSprite());
+	//_data->_window.draw(p->getSprite());
 }
 
 void LevelOne::update(float dt)
 {
-	p->update();
-	//entityManager.update();
+	//p->update();
+	entityManager.update(dt);
 }
 
 void LevelOne::input()

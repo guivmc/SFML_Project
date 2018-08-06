@@ -1,7 +1,8 @@
 #pragma once
 #include <SFML\Graphics.hpp>
+#include "Animation.h"
 
-class Persona 
+class Persona
 {
 protected:
 	//Logic
@@ -17,7 +18,7 @@ public:
    ~Persona() {}
 	Persona(int x, int y, float hp, sf::Texture &texture);
 
-	virtual void update() = 0;
+	virtual void update(float dt) = 0;
 
 	bool isDead();
 

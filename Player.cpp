@@ -52,7 +52,7 @@ void Player::moveY(float speedY)
 
 bool Player::isDead()
 {
-	return (hp > 0);
+	return (hp < 0);
 }
 
 //Graphics

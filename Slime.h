@@ -3,9 +3,11 @@
 
 class Slime : public Persona
 {
+private:
+	Animation anim;
 public:
-	Slime(){}
+	Slime(int x, int y, float hp, sf::Texture &texture);
    ~Slime(){}
-    Slime(int x, int y, float hp, sf::Texture &texture);
-	void update();
+  
+	void update(float dt);
 };

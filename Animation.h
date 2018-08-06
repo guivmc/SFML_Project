@@ -4,28 +4,20 @@
 
 class Animation
 {
-protected:
-	//Timing
-	sf::Clock clock;
-	float totalTime, secondsToElapse;
-	int animSheetHeight, currentFrameWidth, totalFrames, frameCount = 0;
-	sf::Vector2i spriteSize;
-
+private:
+	//TotalTime since last change Image, switchTime = time to wait between frames
+	float totalTime, switchTime;
+	//ImageCount = image total rows.
+	sf::Vector2u imageCount, currentImage;
+	sf::IntRect resultRect;
 public:
-	Animation(sf::Vector2i spriteSize, int animSheetHeight, float secondsToElapse, int totalFrmaes);
-   ~Animation(){}
+	Animation() {}
+   ~Animation() {}
 
-	//Anims. with the sequence 1-2-3
-    sf::IntRect &soloAnim(float dt);
-	//Anims. with the sequence 1-2-3-1-2-3
-	//void directAnim(float dt);
-	//Anims. with the sequence 1-2-3-2-1
-	//void reverseAnim(float dt);
+   Animation(sf::Texture &texture, sf::Vector2u imageCount, float switchTime);
 
-	//Getters
-	sf::IntRect &getCurrentFrame();
-	//Setters
-	void setSecondsToElapse(float secondsToElapse);
+   void playAnim(int row, float dt);
+
+   //Getters
+   sf::IntRect &getResultRect();
 };
-
-
